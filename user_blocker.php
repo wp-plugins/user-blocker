@@ -4869,11 +4869,6 @@ function get_plugins_url()
     wp_enqueue_script('jquery-ui-datepicker');
     wp_register_style('jqueryUI', plugins_url().'/user-blocker/css/jquery-ui.css');
     wp_enqueue_style('jqueryUI');
-    ?>
-    <script type="text/javascript">
-    var plugin_url = '<?php echo plugins_url(); ?>';   
-    </script>
-    <?php
 }
 function disp_msg( $msg ) {
     $msg = stripslashes( nl2br($msg) );
