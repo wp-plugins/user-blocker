@@ -65,6 +65,7 @@ An answer to that question.
 
 == Changelog ==
 verion 1.0 first realse.
+
 Version 1.1: Fixed conflict with wordpress media upload jquery.
 
 == Upgrade notice ==
