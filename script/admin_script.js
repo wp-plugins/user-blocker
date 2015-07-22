@@ -7,17 +7,23 @@ jQuery(document).ready(function() {
         }
     });
     //Datepicker
-    jQuery("#frmdate").datepicker({
+    jQuery("#frmdate").datetimepicker({
         //dateFormat: 'dd-mm-yy',
         minDate: 0,
         changeMonth: true,
+        changeYear: true,
+        timeFormat: 'HH:mm:ss',
         onClose: function (selectedDate) {
-            jQuery("#todate").datepicker("option", "minDate", selectedDate);
+            jQuery("#todate").datetimepicker("option", "minDate", selectedDate);
         }
     });
-    jQuery("#todate").datepicker({
+    //jQuery("#frmdate").datetimepicker();
+    jQuery("#todate").datetimepicker({
         //dateFormat: 'dd-mm-yy',
+        minDate: 0,
         changeMonth: true,
+        changeYear: true,
+        timeFormat: 'HH:mm:ss',
         onClose: function (selectedDate) {
             jQuery("#frmdate").datepicker("option", "maxDate", selectedDate);
         }

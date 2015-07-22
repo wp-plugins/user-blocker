@@ -6,7 +6,7 @@ Tested up to: 4.2.2
 Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.0
+
 
 To block users from admin side except admin users for specific day,time, and date or permanently.
 
@@ -66,7 +66,11 @@ An answer to that question.
 == Changelog ==
 verion 1.0 first realse.
 
-Version 1.1: Fixed conflict with wordpress media upload jquery.
+Version 1.1: 
+- Fixed conflict with wordpress media upload jquery.
+- By default users will be displayed, not roles
+- Time has been included with date to block user for particlur time frame.
+- Timezone will be according to wordpress options timezone and time will be calulated based on that timezone.
 
 == Upgrade notice ==
 

@@ -3,7 +3,7 @@
 Plugin Name: User Blocker
 Description: Block users except admin.
 Author: Solwin Infotech
-Version: 1.0
+Version: 1.1
 Text Domain: user-blocker
 Author URI: http://www.solwininfotech.com/
 Plugin URI: http://www.solwininfotech.com/
@@ -25,18 +25,28 @@ add_action('admin_menu', 'block_user_plugin_setup');
 add_action('init', 'enqueueStyleScript');
 function enqueueStyleScript() {
   wp_enqueue_script('jquery');
+  wp_register_script('jquery-ui-js', 'http://code.jquery.com/ui/1.11.0/jquery-ui.min.js','jquery');
+  wp_enqueue_script('jquery-ui-js');
+  wp_register_script('timepicker-addon-js', plugins_url('script/jquery-ui-timepicker-addon.js', __FILE__),'jquery-ui-js');
+  wp_enqueue_script('timepicker-addon-js');
   wp_register_script('timepicker-js', plugins_url('script/jquery.timepicker.js', __FILE__));
   wp_enqueue_script('timepicker-js');
-  wp_register_script('jquerydate-js', plugins_url('script/bootstrap-datepicker.js', __FILE__));
-  wp_enqueue_script('jquerydate-js');
+//  wp_register_script('jquerydate-js', plugins_url('script/bootstrap-datepicker.js', __FILE__));
+//  wp_enqueue_script('jquerydate-js');
   wp_register_script('datepair-js', plugins_url('script/datepair.js', __FILE__));
   wp_enqueue_script('datepair-js');
-  wp_register_script('jquery-timepicker-js', plugins_url('script/jquery.timepicker.js', __FILE__));
-  wp_enqueue_script('jquery-timepicker-js');
+
+  wp_register_script('jquery-ui-sliderAccess', plugins_url('script/jquery-ui-sliderAccess.js', __FILE__),'jquery-ui');
+  wp_enqueue_script('jquery-ui-sliderAccess');
   wp_register_script('admin_script', plugins_url('script/admin_script.js', __FILE__));
   wp_enqueue_script('admin_script');
+
   wp_register_style('timepicker-css', plugins_url('css/jquery.timepicker.css', __FILE__));
   wp_enqueue_style('timepicker-css');
+  wp_register_style('jqueryUI', plugins_url().'/user-blocker/css/jquery-ui.css');
+  wp_enqueue_style('jqueryUI');
+  wp_register_style('timepicker-addon-css', plugins_url('css/jquery-ui-timepicker-addon.css', __FILE__),'jqueryUI');
+  wp_enqueue_style('timepicker-addon-css');
   wp_register_style('admin_style', plugins_url('css/admin_style.css', __FILE__));
   wp_enqueue_style('admin_style');
 }
@@ -2194,7 +2204,7 @@ function block_user_page() {
     $paged = 1;
     $orderby = 'user_login';
     $order = 'ASC';
-    $display_users = 0;
+    $display_users = 1;
     $is_display_role = 0;
     $username = '';
     $srole= '';
@@ -2690,6 +2700,7 @@ function block_user_page() {
     }
     if( $is_display_role == 1 ) {
         $display_users = 0;
+        $cmbUserBy = 'role';
     }
     //if order and order by set, display users
     if( isset($_GET['orderby']) && $_GET['orderby'] != '' && isset($_GET['order']) && $_GET['order'] != ''  ) {
@@ -2752,8 +2763,8 @@ function block_user_page() {
                 <div class="tablenav top">
                     <label><strong><?php _e( 'Select User/Category: ', 'user-blocker') ?></strong></label>
                     <select name="cmbUserBy" id="cmbUserBy" onchange="changeUserBy();">
-                        <option <?php echo selected($cmbUserBy, 'role'); ?> value="role" selected="selected">Role</option>
                         <option <?php echo selected($cmbUserBy, 'username'); ?> value="username">Username</option>
+                        <option <?php echo selected($cmbUserBy, 'role'); ?> value="role" >Role</option>
                     </select>
                     <?php //Pagination -top ?>
                     <div class="filter_div" style="float: right; <?php if( $display_users == 1 ) { echo 'display: block;'; } else { echo 'display: none;'; } ?>">
@@ -3450,7 +3461,7 @@ function block_user_date_page() {
     $paged = 1;
     $orderby = 'user_login';
     $order = 'ASC';
-    $display_users = 0;
+    $display_users = 1;
     $is_display_role = 0;
     $username = '';
     $srole= '';
@@ -3700,6 +3711,7 @@ function block_user_date_page() {
     }
     if( $is_display_role == 1 ) {
         $display_users = 0;
+        $cmbUserBy = 'role';
     }
     //if order and order by set, display users
     if( isset($_GET['orderby']) && $_GET['orderby'] != '' && isset($_GET['order']) && $_GET['order'] != ''  ) {
@@ -3764,8 +3776,8 @@ function block_user_date_page() {
                 <div class="tablenav top">
                     <label><strong><?php _e( 'Select User/Category: ', 'user-blocker') ?></strong></label>
                     <select name="cmbUserBy" id="cmbUserBy" onchange="changeUserBy();">
-                        <option <?php echo selected($cmbUserBy, 'role'); ?> value="role" selected="selected">Role</option>
                         <option <?php echo selected($cmbUserBy, 'username'); ?> value="username">Username</option>
+                        <option <?php echo selected($cmbUserBy, 'role'); ?> value="role" >Role</option>
                     </select>
                     <?php //Pagination -top ?>
                     <div class="filter_div" style="float: right; <?php if( $display_users == 1 ) { echo 'display: block;'; } else { echo 'display: none;'; } ?>">
@@ -4113,7 +4125,7 @@ function block_user_permenant_page() {
     $paged = 1;
     $orderby = 'user_login';
     $order = 'ASC';
-    $display_users = 0;
+    $display_users = 1;
     $is_display_role= 0;
     $srole = '';
     $role = '';
@@ -4338,6 +4350,7 @@ function block_user_permenant_page() {
     }
     if( $is_display_role == 1 ) {
         $display_users = 0;
+        $cmbUserBy = 'role';
     }
     //if order and order by set, display users
     if( isset($_GET['orderby']) && $_GET['orderby'] != '' && isset($_GET['order']) && $_GET['order'] != ''  ) {
@@ -4400,8 +4413,8 @@ function block_user_permenant_page() {
                 <div class="tablenav top">
                     <label><strong><?php _e( 'Select User/Category: ', 'user-blocker') ?></strong></label>
                     <select name="cmbUserBy" id="cmbUserBy" onchange="changeUserBy();">
-                        <option <?php echo selected($cmbUserBy, 'role'); ?> value="role" selected="selected">Role</option>
                         <option <?php echo selected($cmbUserBy, 'username'); ?> value="username">Username</option>
+                        <option <?php echo selected($cmbUserBy, 'role'); ?> value="role">Role</option>
                     </select>
                     <?php //Pagination -top ?>
                     <div class="filter_div" style="float: right; <?php if( $display_users == 1 ) { echo 'display: block;'; } else { echo 'display: none;'; } ?>">
@@ -4723,15 +4736,13 @@ function block_user_permenant_page() {
 </div>
 <?php
 }
-
-
 //Admin login
 add_filter( 'authenticate', 'myplugin_auth_signon',30, 3 );
 function myplugin_auth_signon( $user, $username, $password ) {
     if(!is_wp_error($user))
     {
         $user = get_userdatabylogin($username);
-        date_default_timezone_set("Asia/Kolkata");
+        //date_default_timezone_set("Asia/Kolkata");
         $user_id = $user->ID;
         $is_active = get_user_meta($user_id,'is_active',true);
         $block_day = get_user_meta($user_id,'block_day',true);
@@ -4769,10 +4780,9 @@ function myplugin_auth_signon( $user, $username, $password ) {
             {
                 $frmdate = $sfrmdate = $block_date['frmdate'];
                 $todate = $stodate = $block_date['todate'];
-                $frmdate = strtotime($frmdate);
+                $frmdate = strtotime($frmdate).'</br>';
                 $todate = strtotime($todate);
-                $current_date = date('m/d/Y');
-                $current_date = strtotime($current_date);                
+                $current_date = current_time( timestamp);
                 if($current_date >= $frmdate && $current_date <= $todate)
                 {
                     $block_msg_date = get_user_meta($user_id,'block_msg_date',true);
@@ -4800,6 +4810,7 @@ function user_blocking_when_register( $user_id ) {
       $permenant_block = get_option($user_role.'_is_active');      
       if($permenant_block == 'n')
       {
+       //   echo 'in';
           update_user_meta($user_id,'is_active','n');
           $block_msg_permenant = get_option($user_role.'_block_msg_permenant');
           update_user_meta($user_id,'block_msg_permenant',$block_msg_permenant);
@@ -4821,6 +4832,7 @@ function user_blocking_when_register( $user_id ) {
               update_user_meta($user_id,'block_msg_date',$date_wise_block_msg);
           }
       }
+     // exit();
 }
 function timeToTwentyfourHour($time) {
     if( $time != '' ) {
@@ -4866,9 +4878,7 @@ function validate_time($time) {
 add_action('init','get_plugins_url');
 function get_plugins_url()
 {
-    wp_enqueue_script('jquery-ui-datepicker');
-    wp_register_style('jqueryUI', plugins_url().'/user-blocker/css/jquery-ui.css');
-    wp_enqueue_style('jqueryUI');
+    
 }
 function disp_msg( $msg ) {
     $msg = stripslashes( nl2br($msg) );
