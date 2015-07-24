@@ -64,9 +64,9 @@ An answer to that question.
 7. Blocked User List
 
 == Changelog ==
-verion 1.0 first realse.
+verion 1.0 : first realse.
 
-Version 1.1: 
+Version 1.1 : 
 - Fixed conflict with wordpress media upload jquery.
 - By default users will be displayed, not roles
 - Time has been included with date to block user for particlur time frame.
