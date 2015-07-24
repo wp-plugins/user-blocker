@@ -11,7 +11,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 To block users from admin side except admin users for specific day,time, and date or permanently.
 
 == Description ==
-User Blocker plugin provide the ability to admin to block or unblock user accounts quickly and effortlessly. User can be blocked by Roll or username for specific day & time OR date range Or permanantly. When someone tries to log in, and if taht user blocked then a friendly error message is displayed on the login screen. You can unblock accounts at any time you want.
+User Blocker plugin provide the ability to admin to block or unblock user accounts quickly and effortlessly. User can be blocked by Roll or username for specific day & time OR date range Or permanently. When someone tries to log in, and if that user blocked then a friendly error message is displayed on the login screen. You can unblock accounts at any time you want.
 Also admin can view blocked user list and quickly search user and unblock account if require.
 
 
@@ -23,7 +23,7 @@ Also admin can view blocked user list and quickly search user and unblock accoun
 * Unblock user any time
 * Block user by UserName OR by Role
 * Customizable message for each blocked User OR Blocked Role
-* View blocked user list By Time, By Date and Permanently blcoked users.
+* View blocked user list By Time, By Date and Permanently blocked users.
 * Easy to search any blocked user by username/ email / First name to view blocking status and modify or remove blocking
 
 
